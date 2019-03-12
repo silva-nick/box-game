@@ -6,6 +6,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Paint;
 import javafx.geometry.Point2D;
+import java.util.Set;
+import java.util.Arrays;
 
 public class Map{
 
@@ -29,5 +31,10 @@ public class Map{
     Shape base = Path.union(floor, nullPoint);
     base.setFill(Paint.valueOf("#03a320"));
     return base;
+  }
+
+  public void printChangePoints(){
+    Object x[] = map.keySet().toArray();
+    System.out.println(Arrays.deepToString(x));
   }
 }
