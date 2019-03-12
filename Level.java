@@ -5,10 +5,12 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Paint;
 import javafx.geometry.Point2D;
+import java.util.ArrayList;
 
 public class Level{
 
   private Shape base;
+  private ArrayList changeList = new ArrayList();
   private Point2D startPoint = new Point2D(0.0, 0.0);
 
   public Level(MapType type){

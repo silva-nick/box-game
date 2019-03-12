@@ -43,7 +43,7 @@ public class Game extends Application{
 
     map = new Map(1);
 
-    layout.getChildren().addAll(background, map.getMap().get(0).getLevel(), piece);
+    layout.getChildren().addAll(background, map.getLevel(), piece);
     scene = new Scene(layout, 600, 600);
 
     Arrays.fill(inputStatus, false);
@@ -65,8 +65,8 @@ public class Game extends Application{
           System.out.println(piece.getDir().toString());
           break;
         case E:
-          layout.getChildren().remove(map.getMap().get(0).getLevel());
-          layout.getChildren().add(map.getMap().get(1).getLevel());
+          //layout.getChildren().remove(map.getMap().get(0).getLevel());
+        //  layout.getChildren().add(map.getMap().get(1).getLevel());
         default: break;
       }
     });
@@ -82,7 +82,7 @@ public class Game extends Application{
           inputStatus[2] = false;
           break;
         case Q:
-          System.out.println(map.getMap().get(0).getLevel().getLayoutBounds().toString()+"/n");
+          System.out.println(map.getLevel().getLayoutBounds().toString()+"/n");
           break;
         default: break;
       }
@@ -146,7 +146,7 @@ public class Game extends Application{
       if(piece.getY()<=274){
         piece.setDir(piece.getDir().add(0, 2));
       }
-      if(piece.intersects(map.getMap().get(0).getLevel().getBoundsInLocal())){System.out.println("They intersect");}
+      if(piece.intersects(map.getLevel().getBoundsInLocal())){System.out.println("They intersect");}
       //if(piece.intersects(map.getMap().get(0).getLevel().getBoundsInLocal())){System.out.println("They intersect");}
     }
   }
