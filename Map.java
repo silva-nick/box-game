@@ -1,4 +1,4 @@
-import java.util.Hashtable;
+import java.util.ArrayList;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.scene.shape.Path;
@@ -11,21 +11,21 @@ import java.util.Arrays;
 
 public class Map{
 
-  private Hashtable<Point2D, Rectangle> map = new Hashtable<Point2D, Rectangle>();
+  private ArrayList<Level> map = new ArrayList<Level>();
   //should be a dictionary that maps pixles to a rectangle
   public Map(int x){
-    map.put(new Point2D(0, 0), new Rectangle(0.0,   526.0, 600.0, 74.0));
+    map.add(new Level(new Point2D(0, 0), new Rectangle(0.0, 526.0, 600.0, 74.0)));
     for(int i = 0; i<x; i++){
-      map.put(new Point2D(0, 1), new Rectangle(0.0,   526.0, 600.0, 74.0));
+      map.add(new Level(new Point2D(0, 1), new Rectangle(0.0,   526.0, 600.0, 74.0)));
     }
   }
 
-  public Hashtable getMap(){
-    System.out.println(map.keys());
+  public ArrayList getMap(){
     return map;
   }
 
   public Shape getLevel(){
+    printChangePoints();
     Rectangle floor = new Rectangle(0.0,   526.0, 600.0, 74.0);
     Rectangle nullPoint = new Rectangle(0.0,  0.0, 0.0, 0.0);
     Shape base = Path.union(floor, nullPoint);
@@ -34,7 +34,8 @@ public class Map{
   }
 
   public void printChangePoints(){
-    Object x[] = map.keySet().toArray();
-    System.out.println(Arrays.deepToString(x));
+    for(int x = 0; x < map.size() - 1; x++){
+      System.out.println(map.get(x));
+    }
   }
 }
