@@ -2,7 +2,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.geometry.Point2D;
 
 public class Piece extends Rectangle{
-
+  //a rectangle with a movement vector
   static final int XSIZE = 30;
   static final int YSIZE = 40;
   private Point2D dir = new Point2D(0,0);

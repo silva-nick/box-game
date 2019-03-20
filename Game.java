@@ -14,12 +14,12 @@ import javafx.scene.paint.Paint;
 
 public class Game extends Application{
 
-  static final int JUMPHEIGHT = 60;
-  static final int MOVESPEED = 5;
-  Scene scene;
-  Piece piece;
-  boolean[] inputStatus = new boolean[3];
-  Map map;
+  static final int JUMPHEIGHT = 60; //set height a piece can jump
+  static final int MOVESPEED = 5; //set speed a piece can move
+  Scene scene; //the frame where the game is played
+  Piece piece; //main piece in the game
+  boolean[] inputStatus = new boolean[3]; //array that contains whether left, right, or up are being pressed
+  Map map; //draws the rectangles that form the map
 
   public static void main(String[] args) {
     launch(args);
@@ -31,23 +31,28 @@ public class Game extends Application{
 
     AnchorPane layout = new AnchorPane();
 
+    //creates the sky blue background
     Rectangle background = new Rectangle(600,600,Paint.valueOf("#00BFFF"));
 
     piece = new Piece();
     System.out.print(piece.getX()+" "+piece.getY());
 
+    //sets the piece's default location
     piece.setX(0);
     piece.setY(0);
     piece.setTranslateX(0);
     piece.setTranslateY(0);
 
-    map = new Map(1);
+    map = new Map(1); //instantiates the map
 
+    //adds the map to the layout and then the layout to the scene
     layout.getChildren().addAll(background, map.getLevel(), piece);
     scene = new Scene(layout, 600, 600);
 
+    //resets all key inputs
     Arrays.fill(inputStatus, false);
 
+    //All of this handles inputs
     scene.setOnKeyPressed(e -> {
       switch(e.getCode()){
         case W:
@@ -60,6 +65,7 @@ public class Game extends Application{
           inputStatus[2] = true;
           break;
         case Q:
+          //helpful print statements that tell where the piece is, and its movement vectors
           System.out.println(piece.	getLayoutX()+" "+piece.	getLayoutY());
           System.out.println(piece.getX()+" "+piece.getY());
           System.out.println(piece.getDir().toString());
@@ -87,10 +93,12 @@ public class Game extends Application{
         default: break;
       }
     });
+    //Prints where the mouse is clicked for troubleshooting
     scene.setOnMouseClicked(e->{System.out.println(e.getSceneX() +" "+ e.getSceneY());});
 
     AnimationTimer timer = new Timer();
     timer.start();
+    //sets up the game loop
 
     primaryStage.setScene(scene);
     primaryStage.fullScreenProperty();
@@ -100,6 +108,7 @@ public class Game extends Application{
 
     @Override
     public void handle(long now){
+      //the main game loop, checks inputs then checks the piece
       if(inputStatus[0] && (piece.getDir().getY()==0 && piece.getY()>200)){piece.setDir(piece.getDir().add(0,-JUMPHEIGHT));};
       if(inputStatus[1]){piece.setDir(piece.getDir().add(-5,0));};
       if(inputStatus[2]){piece.setDir(piece.getDir().add(5,0));};
@@ -108,6 +117,7 @@ public class Game extends Application{
     }
 
     private void checkPiece(){
+      //Handles movement, ie gravity, inertia
       if(piece.getDir().getY()<0){
         piece.setTranslateY(piece.getY()+piece.getDir().getY()/10);
         piece.setY(piece.getY()+piece.getDir().getY()/10);
@@ -133,6 +143,7 @@ public class Game extends Application{
     }
 
     private void checkBounds(){
+      //collision detection
       if(piece.getX()<5){
         piece.setX(5);
         piece.setTranslateX(5);

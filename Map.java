@@ -12,8 +12,10 @@ import java.util.Arrays;
 public class Map{
 
   private ArrayList<Level> map = new ArrayList<Level>();
-  //should be a dictionary that maps pixles to a rectangle
+  //an arraylist of all of the rectangles on the map
+
   public Map(int x){
+    //constructs a map with points and stuff
     map.add(new Level(new Point2D(0, 0), new Rectangle(0.0, 526.0, 600.0, 74.0)));
     for(int i = 0; i<x; i++){
       map.add(new Level(new Point2D(0, 1), new Rectangle(0.0,   526.0, 600.0, 74.0)));
