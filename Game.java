@@ -43,7 +43,7 @@ public class Game extends Application{
     piece.setTranslateX(0);
     piece.setTranslateY(0);
 
-    map = new Map(1); //instantiates the map
+    map = new Map(4); //instantiates the map
 
     //adds the map to the layout and then the layout to the scene
     layout.getChildren().addAll(background, map.getLevel(), piece);
@@ -72,7 +72,7 @@ public class Game extends Application{
           break;
         case E:
           //layout.getChildren().remove(map.getMap().get(0).getLevel());
-        //  layout.getChildren().add(map.getMap().get(1).getLevel());
+          //layout.getChildren().add(map.getMap().get(1).getLevel());
         default: break;
       }
     });

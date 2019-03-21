@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.Arrays;
+import java.util.Random;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.scene.shape.Path;
@@ -6,8 +9,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Paint;
 import javafx.geometry.Point2D;
-import java.util.Set;
-import java.util.Arrays;
 
 public class Map{
 
@@ -16,9 +17,13 @@ public class Map{
 
   public Map(int x){
     //constructs a map with points and stuff
-    map.add(new Level(new Point2D(0, 0), new Rectangle(0.0, 526.0, 600.0, 74.0)));
-    for(int i = 0; i<x; i++){
-      map.add(new Level(new Point2D(0, 1), new Rectangle(0.0,   526.0, 600.0, 74.0)));
+    Random levelPos = new Random();
+    //map.add(new Level(new Point2D(0, 0), new Rectangle(0.0, 526.0, 600.0, 74.0)));
+    map.add(new Level(new Point2D(0, 0), new Rectangle(0.0,  0.0, 0.0, 0.0)));
+    for(int i = 1; i<x; i++){
+      Rectangle temp = map.get(i - 1).getShape();
+      double lastPosition = temp.getX() + temp.getWidth();
+      map.add(new Level(new Point2D(0, 1), new Rectangle(lastPosition, 426.0 + levelPos.nextDouble() * 100 , levelPos.nextDouble() * 1000, 300)));
     }
   }
 
@@ -27,17 +32,19 @@ public class Map{
   }
 
   public Shape getLevel(){
-    printChangePoints();
-    Rectangle floor = new Rectangle(0.0,   526.0, 600.0, 74.0);
-    Rectangle nullPoint = new Rectangle(0.0,  0.0, 0.0, 0.0);
-    Shape base = Path.union(floor, nullPoint);
+
+    Shape base = new Rectangle(0.0,  0.0, 0.0, 0.0);
+    for(int i = 0; i < map.size(); i++){
+      base = Path.union(base, map.get(i).getShape());
+    }
     base.setFill(Paint.valueOf("#03a320"));
     return base;
   }
 
   public void printChangePoints(){
-    for(int x = 0; x < map.size() - 1; x++){
-      System.out.println(map.get(x));
+
+    for(int x = 0; x < map.size(); x++){
+      System.out.println(map.get(x).getPos());
     }
   }
 }
