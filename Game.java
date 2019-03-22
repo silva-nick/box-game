@@ -16,10 +16,11 @@ public class Game extends Application{
 
   static final int JUMPHEIGHT = 60; //set height a piece can jump
   static final int MOVESPEED = 5; //set speed a piece can move
-  Scene scene; //the frame where the game is played
+
   Piece piece; //main piece in the game
-  boolean[] inputStatus = new boolean[3]; //array that contains whether left, right, or up are being pressed
   Map map; //draws the rectangles that form the map
+  AnchorPane layout;
+  boolean[] inputStatus = new boolean[3]; //array that contains whether left, right, or up are being pressed
 
   public static void main(String[] args) {
     launch(args);
@@ -29,7 +30,7 @@ public class Game extends Application{
   public void start(Stage primaryStage) throws Exception{
     primaryStage.setTitle("D3MO");
 
-    AnchorPane layout = new AnchorPane();
+    layout = new AnchorPane();
 
     //creates the sky blue background
     Rectangle background = new Rectangle(600,600,Paint.valueOf("#00BFFF"));
@@ -43,11 +44,11 @@ public class Game extends Application{
     piece.setTranslateX(0);
     piece.setTranslateY(0);
 
-    map = new Map(4); //instantiates the map
+    map = new Map(20); //instantiates the map
 
     //adds the map to the layout and then the layout to the scene
     layout.getChildren().addAll(background, map.getLevel(), piece);
-    scene = new Scene(layout, 600, 600);
+    Scene scene = new Scene(layout, 600, 600);
 
     //resets all key inputs
     Arrays.fill(inputStatus, false);
@@ -152,7 +153,12 @@ public class Game extends Application{
       else if(piece.getX()>280){
         piece.setX(280);
         piece.setTranslateX(280);
-        if(piece.getDir().getX()>0) piece.setDir(-1*Math.abs(piece.getDir().getX()),piece.getDir().getY());
+        //f(piece.getDir().getX()>0) piece.setDir(-1*Math.abs(piece.getDir().getX()),piece.getDir().getY());
+        map.move(10);
+        layout.getChildren().remove(map.getLevel());
+        layout.getChildren().add(map.getLevel());
+        layout.getChildren().remove(piece);
+        layout.getChildren().add(piece);
       }
       if(piece.getY()<=274){
         piece.setDir(piece.getDir().add(0, 2));

@@ -18,8 +18,7 @@ public class Map{
 
   public Map(int x){
     //constructs a map with points and stuff
-    Random levelPos = new Ra
-    ndom(); //random for defining height and width of new blocks
+    Random levelPos = new Random(); //random for defining height and width of new blocks
 
     map.add(new Level(new Point2D(0, 0), new Rectangle(0.0,  0.0, 0.0, 0.0))); //initializes the map with a blank level
     for(int i = 1; i<x; i++){
@@ -47,6 +46,13 @@ public class Map{
 
     for(int x = 0; x < map.size(); x++){
       System.out.println(map.get(x).getPos());
+    }
+  }
+
+  public void move(double xVelocity){
+    for(Level m : map){
+      m.getShape().setTranslateX(m.getShape().getX() - xVelocity);
+      m.getShape().setX(m.getShape().getX() - xVelocity);
     }
   }
 }
