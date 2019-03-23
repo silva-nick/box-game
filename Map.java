@@ -22,11 +22,11 @@ public class Map{
     //constructs a map with points and stuff
     Random levelPos = new Random(); //random for defining height and width of new blocks
 
-    map.add(new Level(new Point2D(0, 0), new Rectangle(0.0,  0.0, 0.0, 0.0))); //initializes the map with a blank level
+    map.add(new Level(0, new Rectangle(0.0,  0.0, 0.0, 0.0))); //initializes the map with a blank level
     for(int i = 1; i<x; i++){
       Rectangle temp = map.get(i - 1).getShape();
       double lastPosition = temp.getX() + temp.getWidth(); //finds the ending position of the last Level
-      map.add(new Level(new Point2D(0, 1), new Rectangle(lastPosition, 426.0 + levelPos.nextDouble() * 100 , levelPos.nextDouble() * 1000, 300)));
+      map.add(new Level(lastPosition, new Rectangle(lastPosition, 426.0 + levelPos.nextDouble() * 100 , levelPos.nextDouble() * 1000, 300)));
     }
     setLevel();
   }

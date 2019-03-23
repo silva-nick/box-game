@@ -143,12 +143,11 @@ public class Game extends Application{
       if(piece.getX()<5){
         piece.setX(5);
         piece.setTranslateX(5);
-        if(piece.getDir().getX()<0) piece.setDir(Math.abs(piece.getDir().getX()),piece.getDir().getY());
+        if(((Level)map.getMap().get(0)).getShape().getX() != 0) map.move(-10);
       }
       else if(piece.getX()>250){
         piece.setX(250);
         piece.setTranslateX(250);
-        //if(piece.getDir().getX()>0) piece.setDir(-1*Math.abs(piece.getDir().getX()),piece.getDir().getY());
         map.move(10);
       }
       if(piece.getY()<=274){
