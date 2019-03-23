@@ -16,6 +16,8 @@ public class Map{
   //SHOULD MAKE THIS A QUEUE
   //an arraylist of all of the rectangles on the map
 
+  public Shape gameLevel;
+
   public Map(int x){
     //constructs a map with points and stuff
     Random levelPos = new Random(); //random for defining height and width of new blocks
@@ -26,20 +28,21 @@ public class Map{
       double lastPosition = temp.getX() + temp.getWidth(); //finds the ending position of the last Level
       map.add(new Level(new Point2D(0, 1), new Rectangle(lastPosition, 426.0 + levelPos.nextDouble() * 100 , levelPos.nextDouble() * 1000, 300)));
     }
+    setLevel();
   }
 
   public ArrayList getMap(){
     return map;
   }
 
-  public Shape getLevel(){
+  public void setLevel(){
 
     Shape base = new Rectangle(0.0,  0.0, 0.0, 0.0);
     for(int i = 0; i < map.size(); i++){
       base = Path.union(base, map.get(i).getShape());
     }
-    base.setFill(Paint.valueOf("#03a320"));
-    return base;
+    gameLevel = base;
+    gameLevel.setFill(Paint.valueOf("#03a320"));
   }
 
   public void printChangePoints(){
@@ -50,9 +53,11 @@ public class Map{
   }
 
   public void move(double xVelocity){
+
     for(Level m : map){
       m.getShape().setTranslateX(m.getShape().getX() - xVelocity);
       m.getShape().setX(m.getShape().getX() - xVelocity);
     }
+    gameLevel.setLayoutX(gameLevel.getLayoutX() - xVelocity);
   }
 }

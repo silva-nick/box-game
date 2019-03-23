@@ -47,7 +47,7 @@ public class Game extends Application{
     map = new Map(20); //instantiates the map
 
     //adds the map to the layout and then the layout to the scene
-    layout.getChildren().addAll(background, map.getLevel(), piece);
+    layout.getChildren().addAll(background, map.gameLevel, piece); //!!!
     Scene scene = new Scene(layout, 600, 600);
 
     //resets all key inputs
@@ -69,11 +69,7 @@ public class Game extends Application{
           //helpful print statements that tell where the piece is, and its movement vectors
           System.out.println(piece.	getLayoutX()+" "+piece.	getLayoutY());
           System.out.println(piece.getX()+" "+piece.getY());
-          System.out.println(piece.getDir().toString());
           break;
-        case E:
-          //layout.getChildren().remove(map.getMap().get(0).getLevel());
-          //layout.getChildren().add(map.getMap().get(1).getLevel());
         default: break;
       }
     });
@@ -89,7 +85,6 @@ public class Game extends Application{
           inputStatus[2] = false;
           break;
         case Q:
-          System.out.println(map.getLevel().getLayoutBounds().toString()+"/n");
           break;
         default: break;
       }
@@ -150,21 +145,16 @@ public class Game extends Application{
         piece.setTranslateX(5);
         if(piece.getDir().getX()<0) piece.setDir(Math.abs(piece.getDir().getX()),piece.getDir().getY());
       }
-      else if(piece.getX()>280){
-        piece.setX(280);
-        piece.setTranslateX(280);
-        //f(piece.getDir().getX()>0) piece.setDir(-1*Math.abs(piece.getDir().getX()),piece.getDir().getY());
+      else if(piece.getX()>250){
+        piece.setX(250);
+        piece.setTranslateX(250);
+        //if(piece.getDir().getX()>0) piece.setDir(-1*Math.abs(piece.getDir().getX()),piece.getDir().getY());
         map.move(10);
-        layout.getChildren().remove(map.getLevel());
-        layout.getChildren().add(map.getLevel());
-        layout.getChildren().remove(piece);
-        layout.getChildren().add(piece);
       }
       if(piece.getY()<=274){
         piece.setDir(piece.getDir().add(0, 2));
       }
-      if(piece.intersects(map.getLevel().getBoundsInLocal())){System.out.println("They intersect");}
-      //if(piece.intersects(map.getMap().get(0).getLevel().getBoundsInLocal())){System.out.println("They intersect");}
+      //Collision detection here
     }
   }
 }
