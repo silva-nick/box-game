@@ -67,8 +67,8 @@ public class Game extends Application{
           break;
         case Q:
           //helpful print statements that tell where the piece is, and its movement vectors
-          System.out.println(piece.	getLayoutX()+" "+piece.	getLayoutY());
-          System.out.println(piece.getX()+" "+piece.getY());
+          //System.out.println(piece.	getLayoutX()+" "+piece.	getLayoutY());
+          //System.out.println(piece.getX()+" "+piece.getY());
           break;
         default: break;
       }
@@ -153,7 +153,7 @@ public class Game extends Application{
       if(piece.getY()<=274){
         piece.setDir(piece.getDir().add(0, 2));
       }
-      //Collision detection here
+      Rectangle colRect = map.findRectangle(piece.getX());
     }
   }
 }

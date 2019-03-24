@@ -45,13 +45,6 @@ public class Map{
     gameLevel.setFill(Paint.valueOf("#03a320"));
   }
 
-  public void printChangePoints(){
-
-    for(int x = 0; x < map.size(); x++){
-      System.out.println(map.get(x).getPos());
-    }
-  }
-
   public void move(double xVelocity){
 
     for(Level m : map){
@@ -60,4 +53,9 @@ public class Map{
     }
     gameLevel.setLayoutX(gameLevel.getLayoutX() - xVelocity);
   }
+
+  public Rectangle findRectangle(double x){
+    return null; //returns the rectangle at that position x
+  }
+
 }
